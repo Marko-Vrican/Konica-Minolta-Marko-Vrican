@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Churn Analysis — The Solution</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <a href="index.html" class="brand-link">
+    <h1>Customer Churn</h1>
+    <div class="brand-sub">← Back to start</div>
+  </a>
+
+  <a href="data.html"><span class="step">1</span>Data</a>
+  <a href="problem.html"><span class="step">2</span>Problem</a>
+  <a href="solution.html" class="active"><span class="step">3</span>Solution</a>
+
+  <div class="footer-sig">
+    Prepared by<br><b>Marko Vríčan</b><br>2026
+  </div>
+</aside>
+
+<main class="main">
+
+  <span class="tag tag-solution">Step 3 — The Solution</span>
+  <h1 class="page-title">An AI model that predicts churn before it happens.</h1>
+  <p class="subtitle">
+    We tested five machine-learning approaches on the customer data. The best model —
+    <span class="term">Gradient Boosting<span class="term-tip">An algorithm that builds hundreds of small decision trees in sequence. Each new tree corrects the mistakes of the previous ones. Result: strong predictions and clear feature importance.</span></span> —
+    identifies at-risk customers with 87% accuracy. Retention teams can now act on
+    individual predictions instead of reacting after the fact.
+  </p>
+
+  <!-- KEY METRICS -->
+  <div class="grid">
+    <div class="card">
+      <div class="metric success">87.1<span class="metric-small">%</span></div>
+      <div class="label">
+        Prediction
+        <span class="term">accuracy<span class="term-tip">Out of 100 predictions the model makes, about 87 are correct.</span></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="metric success">0.878</div>
+      <div class="label">
+        <span class="term">ROC-AUC<span class="term-tip">A score from 0.5 (random guessing) to 1.0 (perfect). 0.878 means the model reliably ranks customers by risk of leaving — a strong result for this type of problem.</span></span>
+        score
+      </div>
+    </div>
+    <div class="card">
+      <div class="metric">5</div>
+      <div class="label">Models compared</div>
+    </div>
+    <div class="card">
+      <div class="metric" style="font-size:26px; line-height:1.1;">Gradient<br>Boosting</div>
+      <div class="label">Winning approach</div>
+    </div>
+  </div>
+
+  <!-- PLAIN TERMS - BIG -->
+  <div class="plain-terms success">
+    <div class="pt-icon">✓</div>
+    <div style="width:100%;">
+      <h3>In plain terms — two questions the model answers</h3>
+
+      <div class="dual-metric">
+
+        <div class="dm-card">
+          <div class="dm-num">78%</div>
+          <div class="dm-title">
+            <span class="term">Precision<span class="term-tip">Of all customers the model flags as at-risk, the percentage who truly are. High precision = focused, non-wasteful outreach.</span></span>
+          </div>
+          <div class="dm-q">"When the model rings the alarm, is it right?"</div>
+          <div class="dm-a">
+            Out of every 100 customers the model flags,
+            <b>78 will genuinely leave</b>. Retention calls land on real risk —
+            not on random customers.
+          </div>
+        </div>
+
+        <div class="dm-card">
+          <div class="dm-num">50%</div>
+          <div class="dm-title">
+            <span class="term">Recall<span class="term-tip">Of all customers who actually leave, the percentage the model flags in advance. High recall = few missed exits, but more false alarms.</span></span>
+          </div>
+          <div class="dm-q">"Does the model catch everyone who leaves?"</div>
+          <div class="dm-a">
+            Out of every 100 customers who actually exit, the model
+            catches <b>50 in advance</b>. The other half slip through —
+            a deliberate trade-off.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="dm-tradeoff">
+        <b>Why the trade-off:</b> a stricter model catches fewer exits but never
+        wastes a call. A more aggressive one catches everyone but wastes many.
+        Ours is tuned toward <b>precision</b> — every flagged customer is worth
+        the outreach. The threshold is <b>not fixed</b>: the business can dial it
+        toward higher recall (catch more, accept more false alarms) whenever
+        strategy demands.
+      </div>
+    </div>
+  </div>
+
+  <!-- MODEL COMPARISON -->
+  <div class="section">
+    <h2>Model comparison</h2>
+    <p class="section-sub">
+      All five approaches were tested on the same 2,000-customer
+      <span class="term">hold-out sample<span class="term-tip">A set of customers hidden from the model during training. Used only to score performance — an honest exam that prevents inflated results.</span></span>.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Model</th>
+            <th>Accuracy</th>
+            <th>ROC-AUC</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#F0FDF4;">
+            <td><b>1</b></td>
+            <td><b>Gradient Boosting</b></td>
+            <td><b>87.1%</b></td>
+            <td><b>0.878</b></td>
+            <td>Selected — best overall balance</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Random Forest</td>
+            <td>86.7%</td>
+            <td>0.863</td>
+            <td>Very close runner-up</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>XGBoost</td>
+            <td>85.5%</td>
+            <td>0.846</td>
+            <td>Strong on complex patterns</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Neural Network</td>
+            <td>86.2%</td>
+            <td>0.863</td>
+            <td>Comparable, harder to explain</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Logistic Regression</td>
+            <td>82.9%</td>
+            <td>0.800</td>
+            <td>Simple baseline</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="so-what">
+      <b>So what?</b> Tree-based models clearly beat both the neural network and the
+      simple baseline. Gradient Boosting is chosen because it delivers the best score
+      <em>and</em> it can explain <em>why</em> each customer was flagged — critical for
+      retention teams and for compliance.
+    </div>
+  </div>
+
+  <!-- FEATURE IMPORTANCE -->
+  <div class="section">
+    <h2>What drives the prediction</h2>
+    <p class="section-sub">
+      <span class="term">Feature importance<span class="term-tip">A ranking of how much each customer attribute contributes to the model's decision. Higher = more influence on whether a customer is flagged.</span></span>
+      — the top six attributes account for over 90% of the model's decision.
+    </p>
+
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Age</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 100%;"></div></div>
+        <div class="bar-value">37.4%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Number of Products</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 79.8%;"></div></div>
+        <div class="bar-value">29.8%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Active Member</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 28.5%;"></div></div>
+        <div class="bar-value">10.6%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Account Balance</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 22.5%;"></div></div>
+        <div class="bar-value">8.4%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Country: Germany</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 15.5%;"></div></div>
+        <div class="bar-value">5.8%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Credit Score</div>
+        <div class="bar-track"><div class="bar-fill" style="width: 4.9%;"></div></div>
+        <div class="bar-value">1.8%</div>
+      </div>
+    </div>
+
+    <div class="so-what">
+      <b>So what?</b> Age and number of products together explain <b>two-thirds</b> of
+      the model's decision. Everything management already suspected from the data is
+      quantified — and confirmed.
+    </div>
+  </div>
+
+  <!-- HONEST LIMITATIONS -->
+  <div class="limitations">
+    <h3>Honest limitations</h3>
+    <p>
+      <b>The model predicts the "who", not the "why".</b> It tells retention teams
+      which customers are about to leave — but the conversation itself still decides
+      whether they stay. Human skill converts a flag into a save.
+    </p>
+    <p>
+      <b>Patterns drift over time.</b> The model was trained on the current customer
+      base. New products, market shifts or a new competitor can change behaviour,
+      so it should be re-trained at least quarterly to stay accurate.
+    </p>
+    <p>
+      <b>No shortcuts under the hood.</b> One field (<em>Complain</em>) perfectly
+      matched the outcome — we removed it before training. The 87% accuracy is
+      earned on genuine signals, not on a data leak.
+    </p>
+  </div>
+
+  <!-- WHAT TO DO NEXT -->
+  <div class="section">
+    <h2>What to do next</h2>
+    <p class="section-sub">Actions the model directly supports, prioritised by expected business impact.</p>
+
+    <div class="reco">
+      <div class="reco-icon">1</div>
+      <div>
+        <h3>Launch a 40–59 retention programme</h3>
+        <p>
+          Mid-career customers churn at 30–63%. Design targeted loyalty offers, personal
+          account managers or life-event benefits (mortgage, education, retirement planning)
+          for this segment. Prioritise women 50–59 first — they are the single riskiest cell.
+        </p>
+        <span class="impact">Highest ROI</span>
+      </div>
+    </div>
+
+    <div class="reco">
+      <div class="reco-icon">2</div>
+      <div>
+        <h3>Cap cross-selling at two products</h3>
+        <p>
+          Customers with 3+ products almost always leave. Review whether these bundles
+          carry hidden fees, complexity or friction. Two products is the retention sweet
+          spot — the model confirms this quantitatively.
+        </p>
+        <span class="impact">Structural fix</span>
+      </div>
+    </div>
+
+    <div class="reco">
+      <div class="reco-icon">3</div>
+      <div>
+        <h3>Automate a weekly at-risk list</h3>
+        <p>
+          Run the model every Monday and deliver a ranked list of the top 200 customers
+          most likely to leave. Focused outreach beats mass campaigns — 78% of flagged
+          customers are genuinely at risk, so calls convert.
+        </p>
+        <span class="impact">Operational win</span>
+      </div>
+    </div>
+
+    <div class="reco">
+      <div class="reco-icon">4</div>
+      <div>
+        <h3>Run a Germany deep-dive</h3>
+        <p>
+          Germany's churn rate (32%) is double the other markets — a market signal,
+          not a product one. Commission a commercial review to test whether pricing,
+          product-market fit or a specific competitor is behind the gap.
+        </p>
+        <span class="impact">Market-specific</span>
+      </div>
+    </div>
+
+    <div class="reco">
+      <div class="reco-icon">5</div>
+      <div>
+        <h3>Re-engage inactive members</h3>
+        <p>
+          Inactive customers churn at 27% versus 14% for active ones. A structured
+          re-engagement campaign — personal calls, tailored offers, a light-touch
+          onboarding refresh — is the cheapest form of retention available.
+        </p>
+        <span class="impact">Low cost</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <div class="section">
+    <h2>How we built it</h2>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Data audit</h3>
+        <p>Verified 10,000 records — zero missing values, zero duplicates. Removed one leak-prone field.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Exploration</h3>
+        <p>Statistical analysis of every attribute to understand distributions and relationships with churn.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Model selection</h3>
+        <p>Trained and compared five algorithms plus eight neural-network architectures.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Tuning &amp; validation</h3>
+        <p>Grid-searched hyperparameters and validated on a held-out sample the model never saw during training.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BACK TO START CTA -->
+  <div class="section">
+    <a href="index.html" class="cta-next">
+      <div class="cta-icon">↺</div>
+      <div class="cta-body">
+        <h3>End of the story — thanks for reading</h3>
+        <p>Return to the start page to revisit the journey, or jump back to any step from the sidebar.</p>
+      </div>
+      <div class="cta-arrow">↺</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    Customer Churn Analysis · Page 3 of 3 · Solution &amp; Recommendations · 2026
+  </div>
+
+</main>
+
+</body>
+</html>
